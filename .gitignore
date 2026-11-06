@@ -1,0 +1,21 @@
+# Entorno
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Secretos y datos personales (el repo es PÚBLICO)
+.env
+.env.*
+CLAUDE.local.md
+.claude/settings.local.json
+cartera.csv
+cartera*.csv
+!cartera*.enc
+*.key
+*.pem
+
+# Descargas y salidas locales
+outputs/
+*.log
