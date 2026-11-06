@@ -9,7 +9,7 @@
 - T-02 implementada en local: `src/panel_fondos/collectors/{probe,probe_report}.py`, `configs/probe.yaml`, `.github/workflows/probe.yml`, tests y fixtures grabados. Revisada por `revisor`; corregidos sesgos de la métrica (filtro `schedule`, inicio de job, huecos). `uv run pytest -q` → 17 passed; ruff limpio; sonda local → 4/4 precios no nulos (criterio 1 cumplido).
 
 ## Abierto / bloqueos
-- **T-02 criterio 2 sin cumplir:** el usuario debe crear un repo público en GitHub, `git remote add origin … && git push -u origin main`, activar Actions y lanzar `probe` con «Run workflow» una vez (debe aparecer la rama `probe-data`). Tras ≥3 días: `uv run python -m panel_fondos.collectors.probe_report --input probe.jsonl` (bajar el fichero de la rama `probe-data`) y rellenar `docs/INVESTIGACION.md` §7.
+- **T-02 criterio 2 sin cumplir:** repo público `sotoibon/panel-fondos` creado y código subido (push desde terminal fuera de VS Code o con `GIT_ASKPASS=` vacío, usuario `sotoibon` y token con *Contents* y *Workflows*: la sesión de VS Code usa otra cuenta, IbonLanit). Falta confirmar en GitHub: Actions habilitado, *Workflow permissions* en lectura y escritura, `probe` lanzado a mano y rama `probe-data` creada. Tras ≥3 días: `uv run python -m panel_fondos.collectors.probe_report --input probe.jsonl` (bajar el fichero de `probe-data`) y rellenar `docs/INVESTIGACION.md` §7.
 - Sin probar en Actions: el workflow solo está validado sintácticamente (sin `actionlint`).
 - Limitaciones conocidas del workflow (D-011): conflicto de rebase puede perder una línea; si la sonda casca antes de escribir no hay registro.
 - Dudas sin resolver (T-03): cobertura de divisa del Nasdaq 100; cortes y valuation point de iShares EM; swing y fair value de iShares World.
