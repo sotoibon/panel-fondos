@@ -19,11 +19,12 @@ Cada tarea cabe en una sesión y tiene un criterio verificable con un comando.
 - Notas: el repo es público y no puede contener posiciones del usuario. Requiere que el usuario cree el repo en GitHub.
 - Pendiente: (1) el usuario crea el repo público, hace push y lanza `workflow_dispatch`; (2) tras ≥3 días de cron, ejecutar `probe_report --input` sobre la rama `probe-data` y rellenar `docs/INVESTIGACION.md` §7 (o activar plan B si Yahoo bloquea Actions). Hecho: sonda, informe, workflow, tests, criterio 1 verificado en local.
 
-### T-03 · Folletos y KIID: cobertura, cortes y valuation point `[ ]` · M
+### T-03 · Folletos y KIID: cobertura, cortes y valuation point `[x]` · M
 - Objetivo: leer el KID/folleto actual del Nasdaq 100 (cobertura de divisa, hora de corte, publicación del NAV) y el Apéndice V del folleto BISF (EM y World: corte, valuation point, swing, fair value). Guardar los datos en `docs/INVESTIGACION.md` con fuente y página.
 - Aceptación: cada una de las dudas 1-3 de la sección 10 de SPEC queda marcada como resuelta con cita (documento y página) o como «no publicado».
 - Depende de: T-01
 - Agentes sugeridos: investigador
+- Resultado: ver `docs/INVESTIGACION.md` §8. Residual (no bloquea): significado de NDXERNRH, KID de iShares World, cortes propios de MyInvestor («no publicado»).
 
 ### T-04 · Descarga del NAV oficial de los 4 fondos `[ ]` · M
 - Objetivo: módulo que obtiene el histórico de NAV oficial (Vanguard, Investing.com, Yahoo `0P…F` como contraste), con fecha propia de cada NAV, y lo normaliza a un CSV.
