@@ -4,7 +4,7 @@ Leyenda: `[ ]` pendiente · `[~]` en curso · `[x]` hecha · `[-]` descartada. T
 Cada tarea cabe en una sesión y tiene un criterio verificable con un comando.
 
 ## Fase 0 — Andamiaje
-### T-01 · Entorno y estructura del proyecto `[ ]` · S
+### T-01 · Entorno y estructura del proyecto `[x]` · S
 - Objetivo: `uv` con dependencias base (`pandas`, `requests`, `pyyaml`, `pytest`, `ruff`), `src/panel_fondos/{collectors,estimation,portfolio}`, `tests/`, `configs/`, `web/`, `.gitignore`, README mínimo.
 - Aceptación: `uv run pytest -q` pasa con un test trivial y `uv run ruff check .` sin errores.
 - Depende de: —

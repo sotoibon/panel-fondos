@@ -55,3 +55,9 @@ Una entrada por decisión. No se borran: si una decisión se revierte, se añade
 - **Opciones:** MAE, RMSE, sesgo, cobertura de bandas.
 - **Decisión:** MAE, RMSE, sesgo y cobertura de la banda del 90 % por fondo y hora, más error en €. Líneas base: «sin cambio» y «solo ETF proxy». Umbrales pendientes del primer backtest.
 - **Consecuencias:** no se cambia el protocolo ni las métricas sin consultar al usuario.
+
+## D-010 · Layout src/ con hatchling y ruff ampliado — 2026-11-06
+- **Contexto:** T-01 necesitaba estructura instalable para que los tests importen `panel_fondos`.
+- **Opciones:** paquete en la raíz o layout `src/`; setuptools o hatchling; ruff con reglas por defecto o ampliadas.
+- **Decisión:** layout `src/panel_fondos/` con build backend `hatchling`, dev-deps en `[dependency-groups]`, Python >=3.11, ruff con `E,F,I,UP,B` y línea 100.
+- **Consecuencias:** `uv sync` instala el paquete en editable; `data/` y `web/` existen con `.gitkeep`.

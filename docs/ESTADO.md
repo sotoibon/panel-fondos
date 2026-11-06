@@ -1,13 +1,12 @@
-<!-- Este fichero se REESCRIBE en cada /cierre. Máximo ~40 líneas. El histórico está en git. -->
 # Estado
 
 - **Actualizado:** 2026-11-06
-- **Fase:** 0 — Andamiaje
+- **Fase:** 0 — Andamiaje (completa)
 - **Tarea en curso:** —
-- **Siguiente tarea:** T-01 · Entorno y estructura del proyecto
+- **Siguiente tarea:** T-02 · Prueba de Yahoo desde GitHub Actions (Fase 1)
 
 ## Última sesión
-- Arranque: investigación de viabilidad (fondos, fuentes de datos, métodos de estimación), entrevista y propuesta aprobada. Memoria del proyecto escrita. No hay código todavía.
+- T-01 hecha: `pyproject.toml` (uv, hatchling), `src/panel_fondos/{collectors,estimation,portfolio}`, `tests/`, `configs/`, `web/`, `data/`, README mínimo. `uv run pytest -q` → 1 passed; `uv run ruff check .` limpio.
 
 ## Abierto / bloqueos
 - El usuario debe crear un repo público en GitHub antes de T-02 (pasos al llegar a esa tarea).
@@ -21,4 +20,4 @@
 - Cifras de precisión en pb de `docs/INVESTIGACION.md` son razonamiento propio, no estudios.
 
 ## Verificar el estado actual
-- `uv run pytest -q` (cuando exista T-01)
+- `uv sync && uv run pytest -q && uv run ruff check .`
