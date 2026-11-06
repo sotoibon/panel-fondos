@@ -28,8 +28,11 @@ funds:
       published: true
     nav:
       lag_business_days: 1
-      sources: [investing, yahoo]
+      sources: [ishares, yahoo]
       yahoo_symbol: 0P0001XF40.F
+      ishares:
+        product_id: 345277
+        file_name: iShares-Developed-World-Index-Fund-IE-S-Acc-EUR_fund
 
   - isin: IE000QAZP7L2
     name: iShares Emerging Markets Index (IE) S Acc EUR
@@ -53,8 +56,11 @@ funds:
       published: true
     nav:
       lag_business_days: 1
-      sources: [investing, yahoo]
+      sources: [ishares, yahoo]
       yahoo_symbol: 0P0001XF3Z.F
+      ishares:
+        product_id: 345276
+        file_name: iShares-Emerging-Markets-Index-Fund-IE-S-Acc-EUR_fund
 
   - isin: ES0165265002
     name: MyInvestor Nasdaq 100 FI
@@ -78,7 +84,7 @@ funds:
       published: false
     nav:
       lag_business_days: 1
-      sources: [investing, yahoo]
+      sources: [yahoo]
       yahoo_symbol: 0P0001MRGW.F
 
   - isin: IE00B42W4L06
@@ -103,5 +109,7 @@ funds:
       published: true
     nav:
       lag_business_days: 1
-      sources: [vanguard, investing, yahoo]
+      sources: [vanguard, yahoo]
       yahoo_symbol: 0P0000XR9M.F
+      vanguard:
+        url: https://www.ch.vanguard/en/professional/product/fund/equity/9159/global-small-cap-index-fund-eur-acc

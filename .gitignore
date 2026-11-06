@@ -19,3 +19,6 @@ cartera*.csv
 # Descargas y salidas locales
 outputs/
 *.log
+
+# Caché local de descargas
+.cache/

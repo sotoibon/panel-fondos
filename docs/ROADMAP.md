@@ -26,12 +26,13 @@ Cada tarea cabe en una sesión y tiene un criterio verificable con un comando.
 - Agentes sugeridos: investigador
 - Resultado: ver `docs/INVESTIGACION.md` §8. Residual (no bloquea): significado de NDXERNRH, KID de iShares World, cortes propios de MyInvestor («no publicado»).
 
-### T-04 · Descarga del NAV oficial de los 4 fondos `[ ]` · M
+### T-04 · Descarga del NAV oficial de los 4 fondos `[x]` · M
 - Objetivo: módulo que obtiene el histórico de NAV oficial (Vanguard, Investing.com, Yahoo `0P…F` como contraste), con fecha propia de cada NAV, y lo normaliza a un CSV.
 - Aceptación: `uv run pytest tests/test_nav.py -q` pasa con respuestas grabadas; `uv run python -m panel_fondos.collectors.nav --isin all` imprime el último NAV y su fecha para los 4 ISIN.
 - Depende de: T-01
 - Agentes sugeridos: investigador → implementador → verificador
 - Notas: respetar ToS: pocas peticiones y caché. Si Investing bloquea, usar solo Yahoo y Vanguard.
+- Resultado: `collectors/nav.py` + `configs/nav.yaml`; fuentes iShares (fichero oficial), Vanguard (HTML de la ficha) y Yahoo; **Investing quedó fuera por sus ToS** (D-014; el Objetivo de arriba es el original). CSV en `data/nav/nav.csv`. Residual: Vanguard solo da ~10 días (histórico largo = Yahoo, ~1 mes por defecto, `--range 5y`).
 
 ## Fase 2 — Datos
 ### T-05 · `funds.yaml`: proxies, divisas y calendarios `[x]` · S

@@ -1,1 +1,1 @@
-- [Patrones de revisión](patrones_revision.md) — sesgos en métricas de cron y push en Actions; en docs: grep del PDF entero, etiquetas [F] y páginas
+- [Patrones de revisión](patrones_revision.md) — sesgos de cron/push en Actions; docs PDF; colectores: excepciones que escapan, caché sin validar, fixtures compartidos

@@ -1,0 +1,12 @@
+# Parámetros de la descarga del NAV oficial (src/panel_fondos/collectors/nav.py).
+user_agent: "Mozilla/5.0 (compatible; panel-fondos-nav)"
+timeout_s: 30
+retries: 2          # reintentos tras el primer intento (429, 5xx, errores de red)
+backoff_s: 2        # espera lineal: backoff_s * nº de intento
+cache_dir: .cache/nav
+cache_ttl_s: 21600  # 6 h: pocas peticiones, ver ToS
+out: data/nav/nav.csv
+yahoo_url: "https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+# iShares: el id de la página (ajax_id) puede cambiar; si lo hace, la fuente falla con claridad
+ishares_url: "https://www.ishares.com/ch/privatkunden/de/produkte/{product_id}/fund/{ajax_id}.ajax"
+ishares_ajax_id: "1535604580403"

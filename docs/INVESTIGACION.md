@@ -80,3 +80,12 @@ Etiqueta ESTIMACIÓN con fecha/hora y fórmula, color distinto del dato oficial 
 **Implicación para el motor [R].** Contratación a futuro: el corte es del día anterior al DD y el precio es el cierre del DD, así que la estimación debe apuntar al cierre del DD de cada mercado, no al corte. En Nasdaq 100 el VL es «del mismo día» sin valuation point publicado: hipótesis a validar en T-05/T-10, no dato. Sin cobertura documentada, el proxy NQ=F necesita la conversión EURUSD (decisión de T-05, a confirmar con el backtest).
 
 **Pendiente.** El Nasdaq 100 tiene un 18,9 % en iShares Developed World (USD, p.12) y 9 % en bonos USD: afecta a la beta del proxy NQ=F (T-08). KID de la clase S EUR de iShares World no analizado; texto íntegro del folleto BISF sobre swing pricing; significado de NDXERNRH; cortes propios de MyInvestor.
+
+## 9. T-04 · Fuentes de NAV oficial (2026-11-06)
+- **iShares (World 345277, EM 345276):** `GET https://www.ishares.com/ch/privatkunden/de/produkte/<id>/fund/1535604580403.ajax?fileType=xls&fileName=<…>_fund&dataType=fund` → SpreadsheetML (~120 KB), hoja «Historisch» (`per | NAV | Daily NAV Change | …`), histórico desde 2025-08. Sin cabeceras especiales. Fechas en alemán e irregulares («05.Nov.2026», «31.Juli2026», «31.März2026», «30.Sept.2026»). La versión de blackrock.com/uk da 403.
+- **Vanguard Global Small-Cap (9159):** HTML de `ch.vanguard/en/professional/product/fund/equity/9159/…`, tabla «Date | NAV (EUR)», ~10 días, «05 Nov 2026», 4 decimales. El botón de descarga completa va por JS (endpoint no hallado). La ficha dice «Base currency: EUR» (en `funds.yaml` está USD: revisar).
+- **Yahoo `0P…F`:** `currency=EUR`, zona Europe/Berlin; la marca de tiempo es 08:00 locales del día del NAV → fecha = fecha local, no UTC. Últimos días con `close: null`; el 06-nov World/Vanguard llegaban al 04-nov (T+2) y el Nasdaq 100 al 03-nov (T+3).
+- **Nasdaq 100 (ES0165265002):** sin fuente oficial consultable (CNMV solo XML mensual; Morningstar exige Selenium). Investing y Rankia describen el índice como «Currency Hedged EUR NTR» (¿NDXERNRH?): sin verificar, contradice `hedged: unknown`.
+- **Investing.com:** descartado por ToS (D-014).
+- **Contraste:** diferencia con Yahoo en el último día común −0,1 / −0,1 / +0,0 pb.
+

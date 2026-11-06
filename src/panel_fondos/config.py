@@ -17,7 +17,7 @@ DEFAULT_PATH = Path(__file__).resolve().parents[2] / "configs" / "funds.yaml"
 
 PROXY_KINDS = {"etf", "future", "fx", "index"}
 PROXY_ROLES = {"primary", "contrast"}
-NAV_SOURCES = {"vanguard", "investing", "yahoo"}
+NAV_SOURCES = {"ishares", "vanguard", "yahoo"}
 HEDGED_VALUES = {True, False, "unknown"}
 CLOSE_REGIONS = {"asia", "europe", "us"}
 _HHMM = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
@@ -134,6 +134,28 @@ def _validate_fund(f: Any, where: str, errors: list[str]) -> None:
             errors.append(f"{where}.nav.sources: lista no vacía de {sorted(NAV_SOURCES)}")
         if not isinstance(nav.get("yahoo_symbol"), str):
             errors.append(f"{where}.nav.yahoo_symbol: obligatorio")
+        if isinstance(src, list):
+            _validate_nav_blocks(nav, src, where, errors)
+
+
+def _validate_nav_blocks(nav: dict, sources: list, where: str, errors: list[str]) -> None:
+    """Cada fuente de NAV que lo necesita exige su bloque de parámetros."""
+    if "ishares" in sources:
+        blk = nav.get("ishares")
+        if not isinstance(blk, dict):
+            errors.append(f"{where}.nav.ishares: obligatorio si 'ishares' está en sources")
+        else:
+            pid = blk.get("product_id")
+            if not isinstance(pid, int) or isinstance(pid, bool):
+                errors.append(f"{where}.nav.ishares.product_id: entero")
+            if not isinstance(blk.get("file_name"), str) or not blk["file_name"]:
+                errors.append(f"{where}.nav.ishares.file_name: texto no vacío")
+    if "vanguard" in sources:
+        blk = nav.get("vanguard")
+        if not isinstance(blk, dict):
+            errors.append(f"{where}.nav.vanguard: obligatorio si 'vanguard' está en sources")
+        elif not isinstance(blk.get("url"), str) or not blk["url"].startswith("https://"):
+            errors.append(f"{where}.nav.vanguard.url: URL https esperada")
 
 
 def validate(data: Any) -> list[dict]:

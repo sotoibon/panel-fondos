@@ -62,3 +62,12 @@ def test_duplicate_isin_fails(raw):
     raw["funds"].append(copy.deepcopy(raw["funds"][0]))
     with pytest.raises(ConfigError, match="duplicado"):
         validate(raw)
+
+
+def test_nav_sources_need_their_block(raw):
+    # funds[0] usa ishares
+    assert "nav.ishares" in _bad(raw, lambda f: f["nav"].pop("ishares"))
+
+
+def test_investing_is_no_longer_a_source(raw):
+    assert "nav.sources" in _bad(raw, lambda f: f["nav"].update(sources=["investing", "yahoo"]))
