@@ -1,0 +1,107 @@
+# Configuración de los 4 fondos. Fuentes: docs/INVESTIGACION.md §1, §2, §8.
+# Convenciones:
+#   - Horas de cierre en CET/CEST (Europe/Madrid) salvo que se indique otra zona.
+#   - verified: true solo si el símbolo se ha comprobado con una captura real de Yahoo (T-02).
+#   - fx.hedged: true | false | unknown. "unknown" = sin evidencia concluyente (no asumir).
+#   - Los pesos por región no van aquí: se estiman en T-08 (D-007).
+funds:
+  - isin: IE000ZYRH0Q7
+    name: iShares Developed World Index (IE) S Acc EUR
+    index: MSCI World NR EUR
+    base_currency: USD
+    share_currency: EUR
+    fx:
+      exposure: [USD, JPY, GBP]
+      hedged: false
+      note: Clase sin cobertura (la p.403 del folleto distingue la clase Hedged).
+    proxies:
+      - {region: world, symbol: EUNL.DE, kind: etf, role: primary, delay_min: 15, verified: true}
+      - {region: us, symbol: ES=F, kind: future, role: primary, delay_min: 10, verified: true}
+      - {region: fx, symbol: EURUSD=X, kind: fx, role: primary, delay_min: 0, verified: true}
+    markets: [XNYS, XLON, XDUB, XETR, XTKS]
+    closes: {asia: "08:00", europe: "17:30", us: "22:00"}
+    dealing:
+      cutoff_local: "14:30"
+      cutoff_tz: Europe/Dublin
+      cutoff_offset_bd: -1
+      valuation_point: Cierre del último mercado relevante del día de contratación
+      published: true
+    nav:
+      lag_business_days: 1
+      sources: [investing, yahoo]
+      yahoo_symbol: 0P0001XF40.F
+
+  - isin: IE000QAZP7L2
+    name: iShares Emerging Markets Index (IE) S Acc EUR
+    index: MSCI EM NR EUR
+    base_currency: USD
+    share_currency: EUR
+    fx:
+      exposure: [TWD, KRW, CNY, INR, USD]
+      hedged: false
+      note: Divisas EM; sin cobertura documentada.
+    proxies:
+      - {region: em, symbol: XMME.DE, kind: etf, role: primary, delay_min: 15, verified: false}
+      - {region: fx, symbol: EURUSD=X, kind: fx, role: primary, delay_min: 0, verified: true}
+    markets: [XNYS, XDUB, XETR, XTAI, XKRX, XSHG, XNSE]
+    closes: {asia: "08:00", europe: "17:30", us: "22:00"}
+    dealing:
+      cutoff_local: "13:30"
+      cutoff_tz: Europe/Dublin
+      cutoff_offset_bd: -1
+      valuation_point: Cierre del último mercado relevante del día de contratación
+      published: true
+    nav:
+      lag_business_days: 1
+      sources: [investing, yahoo]
+      yahoo_symbol: 0P0001XF3Z.F
+
+  - isin: ES0165265002
+    name: MyInvestor Nasdaq 100 FI
+    index: Nasdaq-100 NTR EUR
+    base_currency: EUR
+    share_currency: EUR
+    fx:
+      exposure: [USD]
+      hedged: unknown
+      note: Sin cobertura sistemática declarada (folleto p.1, informe 1S-2026 p.6 y p.12). Hipótesis a validar en T-10.
+    proxies:
+      - {region: us, symbol: NQ=F, kind: future, role: primary, delay_min: 10, verified: true}
+      - {region: fx, symbol: EURUSD=X, kind: fx, role: primary, delay_min: 0, verified: true}
+    markets: [XNYS, XNAS, XMAD]
+    closes: {us: "22:00"}
+    dealing:
+      cutoff_local: "14:00"
+      cutoff_tz: Europe/Madrid
+      cutoff_offset_bd: 0
+      valuation_point: null
+      published: false
+    nav:
+      lag_business_days: 1
+      sources: [investing, yahoo]
+      yahoo_symbol: 0P0001MRGW.F
+
+  - isin: IE00B42W4L06
+    name: Vanguard Global Small-Cap Index EUR Acc
+    index: MSCI World Small Cap
+    base_currency: USD
+    share_currency: EUR
+    fx:
+      exposure: [USD, JPY, GBP]
+      hedged: false
+      note: Base USD o EUR del fondo sin resolver (SPEC §10).
+    proxies:
+      - {region: world_small, symbol: IUSN.DE, kind: etf, role: primary, delay_min: 15, verified: false}
+      - {region: fx, symbol: EURUSD=X, kind: fx, role: primary, delay_min: 0, verified: true}
+    markets: [XNYS, XLON, XDUB, XETR, XTKS]
+    closes: {asia: "08:00", europe: "17:30", us: "22:00"}
+    dealing:
+      cutoff_local: "16:00"
+      cutoff_tz: Europe/Dublin
+      cutoff_offset_bd: -1
+      valuation_point: Cierre de cada mercado principal
+      published: true
+    nav:
+      lag_business_days: 1
+      sources: [vanguard, investing, yahoo]
+      yahoo_symbol: 0P0000XR9M.F

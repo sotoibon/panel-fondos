@@ -74,3 +74,8 @@ Una entrada por decisión. No se borran: si una decisión se revierte, se añade
 - **Decisión:** una duda se da por resuelta si tiene cita (documento y página) o se marca «no publicado» tras buscar. Cobertura del Nasdaq 100 = «no sistemática, sin cobertura declarada» apoyada en folleto p.1 y en el informe semestral (pp. 6 y 12); swing pricing BISF = «no publicado» (0 apariciones en 602 pp.; antidilución vía «Duties and Charges»).
 - **Consecuencias:** el proxy NQ=F necesita EURUSD hasta que el backtest (T-10) demuestre otra cosa. El valuation point del Nasdaq 100 es hipótesis a validar. SPEC.md (líneas 11, 73-74) sigue diciendo «sin confirmar»: actualizar en un `/replan`, no a mano.
 
+
+## D-013 · T-05: esquema de `funds.yaml` y validación manual — 2026-11-06
+- **Contexto:** hacía falta una configuración por fondo validable, sin dependencias nuevas y honesta con lo no verificado.
+- **Decisión:** `configs/funds.yaml` + `src/panel_fondos/config.py` con validador manual que acumula todos los errores (descartado pydantic/jsonschema: dependencia extra para 4 fondos). ISIN con dígito de control. Cada proxy lleva `verified` (true solo si T-02 lo capturó: EUNL.DE, ES=F, NQ=F, EURUSD=X; XMME.DE e IUSN.DE son plausibles, `false`). `fx.hedged` admite `unknown` (Nasdaq 100, D-012). `valuation_point: null` si no está publicado. Proxies por región granular (Europa/Asia) y pesos quedan para T-08; aquí solo los proxies documentados en INVESTIGACION §1.
+- **Consecuencias:** T-06 debe leer símbolos de este fichero y comprobar los `verified: false`. Las exposiciones FX son de la investigación, no de holdings.

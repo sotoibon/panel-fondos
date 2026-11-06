@@ -34,7 +34,7 @@ Cada tarea cabe en una sesión y tiene un criterio verificable con un comando.
 - Notas: respetar ToS: pocas peticiones y caché. Si Investing bloquea, usar solo Yahoo y Vanguard.
 
 ## Fase 2 — Datos
-### T-05 · `funds.yaml`: proxies, divisas y calendarios `[ ]` · S
+### T-05 · `funds.yaml`: proxies, divisas y calendarios `[x]` · S
 - Objetivo: `configs/funds.yaml` con por fondo: ISIN, índice, proxies por región y tramo horario, exposición FX, mercados relevantes, hora de cierre y desfase de publicación; validación con esquema.
 - Aceptación: `uv run pytest tests/test_config.py -q` valida los 4 fondos y falla con un fondo mal formado.
 - Depende de: T-03
