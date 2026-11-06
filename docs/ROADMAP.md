@@ -11,12 +11,13 @@ Cada tarea cabe en una sesión y tiene un criterio verificable con un comando.
 - Agentes sugeridos: implementador → verificador
 
 ## Fase 1 — Viabilidad (resolver incógnitas antes de construir)
-### T-02 · Prueba de Yahoo desde GitHub Actions `[ ]` · M
+### T-02 · Prueba de Yahoo desde GitHub Actions `[~]` · M
 - Objetivo: workflow mínimo con cron cada 5 min que pide 1 lote (EUNL.DE, ES=F, NQ=F, EURUSD=X) y guarda el resultado. Medir bloqueos, nulos y puntualidad del cron durante varios días. Si falla, documentar y proponer plan B (Cloudflare Workers o VM gratuita).
 - Aceptación: `uv run python -m panel_fondos.collectors.probe` devuelve precios no nulos para los 4 símbolos en local; informe de fiabilidad del cron en `docs/INVESTIGACION.md` con % de ejecuciones a tiempo.
 - Depende de: T-01
 - Agentes sugeridos: implementador → investigador
 - Notas: el repo es público y no puede contener posiciones del usuario. Requiere que el usuario cree el repo en GitHub.
+- Pendiente: (1) el usuario crea el repo público, hace push y lanza `workflow_dispatch`; (2) tras ≥3 días de cron, ejecutar `probe_report --input` sobre la rama `probe-data` y rellenar `docs/INVESTIGACION.md` §7 (o activar plan B si Yahoo bloquea Actions). Hecho: sonda, informe, workflow, tests, criterio 1 verificado en local.
 
 ### T-03 · Folletos y KIID: cobertura, cortes y valuation point `[ ]` · M
 - Objetivo: leer el KID/folleto actual del Nasdaq 100 (cobertura de divisa, hora de corte, publicación del NAV) y el Apéndice V del folleto BISF (EM y World: corte, valuation point, swing, fair value). Guardar los datos en `docs/INVESTIGACION.md` con fuente y página.

@@ -44,3 +44,10 @@ Etiqueta ESTIMACIÓN con fecha/hora y fórmula, color distinto del dato oficial 
 
 ## 6. Dudas abiertas
 1. Cobertura de divisa del Nasdaq 100 (T-03). 2. Corte, valuation point, swing y fair value de iShares EM; swing y fair value de iShares World (T-03). 3. Cortes y publicación de NAV de MyInvestor/Andbank, y cortes propios de MyInvestor. 4. Frecuencia de holdings de iShares IE y Vanguard. 5. Tickers EUR de IEEM/IQQE y de ETFs no verificados (EEM, QQQ, CNDX). 6. Base USD o EUR del fondo Vanguard. 7. Límites y fiabilidad del cron de GitHub Actions, y bloqueo de Yahoo desde sus IP (T-02).
+
+## 7. T-02 · Fiabilidad de Yahoo y del cron de GitHub Actions
+**Método.** `probe.yml` (cron `*/5 * * * *`) pide EUNL.DE, ES=F, NQ=F y EURUSD=X al endpoint `v8/finance/chart` y añade una línea a `probe.jsonl` en la rama `probe-data`. Informe: `probe_report` (ver README). «A tiempo» = arranque ≤ 180 s del slot de 5 min (D-011); un slot sin ejecución cuenta como perdido.
+
+**Local (2026-11-06).** 4/4 símbolos con precio no nulo y HTTP 200, sin cookie ni crumb.
+
+**Actions: pendiente.** Resultados tras ≥ 3 días de cron: _por rellenar con la salida de `probe_report`_.

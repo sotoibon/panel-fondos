@@ -1,0 +1,9 @@
+symbols: [EUNL.DE, ES=F, NQ=F, EURUSD=X]
+url: https://query1.finance.yahoo.com/v8/finance/chart/{symbol}
+params:
+  interval: 1m
+  range: 1d
+user_agent: "Mozilla/5.0 (compatible; panel-fondos-probe)"
+timeout_s: 15
+retries: 1
+backoff_s: 2.0

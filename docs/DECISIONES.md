@@ -61,3 +61,10 @@ Una entrada por decisión. No se borran: si una decisión se revierte, se añade
 - **Opciones:** paquete en la raíz o layout `src/`; setuptools o hatchling; ruff con reglas por defecto o ampliadas.
 - **Decisión:** layout `src/panel_fondos/` con build backend `hatchling`, dev-deps en `[dependency-groups]`, Python >=3.11, ruff con `E,F,I,UP,B` y línea 100.
 - **Consecuencias:** `uv sync` instala el paquete en editable; `data/` y `web/` existen con `.gitkeep`.
+
+## D-011 · Sonda T-02: endpoint chart, rama probe-data y métrica «a tiempo» — 2026-11-06
+- **Contexto:** T-02 debe medir bloqueos de Yahoo y puntualidad del cron de Actions durante varios días.
+- **Opciones:** `yfinance` o endpoint `v8/finance/chart` con `requests`; guardar en main, en rama aparte o en artefactos; definir «a tiempo» por slot.
+- **Decisión:** endpoint chart con `requests` (una petición por símbolo, 429/nulos registrados sin excepción, un reintento); resultados JSONL en la rama `probe-data` (elegido por el usuario); cada ejecución se asigna al slot de 5 min que contiene su arranque, «a tiempo» = arranque ≤ 180 s del slot (configurable), y un slot sin ejecución cuenta como perdido (un retraso mayor que el slot deja el original vacío).
+- **Consecuencias:** el umbral de 180 s es propuesta mía, no del usuario: se informan también p50/p90/máx para poder cambiarlo sin re-medir. En local el endpoint respondió 200 sin cookie ni crumb; desde IP de Actions está por medir.
+- **Ajustes tras revisión:** solo cuentan para la puntualidad las ejecuciones con `event == schedule`; se usa la hora de inicio del job (`PROBE_JOB_START`, antes de checkout/uv sync) y se informan los huecos entre ejecuciones consecutivas, porque la asignación por slot oculta retrasos >5 min. Limitaciones aceptadas por ahora: conflicto en `pull --rebase` podría perder una línea, y si la sonda casca antes de escribir no queda registro (se vería como slot perdido).

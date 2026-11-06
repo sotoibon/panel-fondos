@@ -1,0 +1,1 @@
+- [Patrones de revisión](patrones_revision.md) — sesgos en métricas de cron (slots, dispatch, setup) y push concurrente en Actions
